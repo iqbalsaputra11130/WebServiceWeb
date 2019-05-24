@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <script type="text/javascript">
+ var HttpClient = function() {
+ this.get = function(aUrl, aCallback) {
+ var anHttpRequest = new XMLHttpRequest();
+ anHttpRequest.onreadystatechange = function() { 
+ if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+ aCallback(anHttpRequest.responseText);
+ }
+ anHttpRequest.open( "GET", aUrl, true ); 
+ anHttpRequest.send( null ); 
+ }
+ }
+ var theurl='http://papaside.com/data.php';
+ var client = new HttpClient();
+ client.get(theurl, function(response) { 
+ var response1 = JSON.parse(response);
+ // alert(response);
+ document.getElementById("kota").innerHTML = response1.name + ", " + response1.kota;
+ document.getElementById("siang").innerHTML = response1.siang;
+ document.getElementById("malam").innerHTML = response1.malam;
+ document.getElementById("dini_hari").innerHTML = response1.dini_hari;
+ document.getElementById("suhu").innerHTML = response1.suhu;
+ document.getElementById("kelembapan").innerHTML = response1.kelembapan;
+ 
+ }); 
+ </script>
+</head>
+<body>
+<center>
+ Json Tugas UAS
+ <center>
+ <table border="1">
+ <tr><td>kota :</td><td id="kota"></td></tr>
+ <tr><td>siang :</td><td id="siang"></td></tr>
+ <tr><td>malam :</td><td id="malam"></td></tr>
+ <tr><td>dini_hari :</td><td id="dini_hari"></td></tr>
+ <tr><td>suhu :</td><td id="suhu"></td></tr>
+ <tr><td>kelembapan :</td><td id="kelembapan"></td></tr>
+ </table>
+</body>
+</html>
